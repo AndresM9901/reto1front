@@ -1,0 +1,27 @@
+<form [formGroup]="loginForm" class="login" (ngSubmit)="onSubmit()">
+    <h2 class="login__title">Iniciar Sesión</h2>
+    <label class="login__label">
+        Correo
+        <input formControlName="email" type="email" class="" placeholder="Correo" class="login__input">
+        <div *ngIf="loginForm.get('email')!.invalid && (loginForm.get('email')!.dirty || loginForm.get('email')!.touched)" class="login__content--errors">
+            <span *ngIf="loginForm.get('email')!.hasError('required')">El Correo es obligatorio.</span>
+            <span *ngIf="loginForm.get('email')!.hasError('email')">El correo no es valido.</span>
+        </div>
+    </label>
+    <label class="login__label">
+        Contraseña
+        <input formControlName="password" type="password" class="" placeholder="Contraseña" class="login__input">
+        <div *ngIf="loginForm.get('password')!.invalid && (loginForm.get('password')!.dirty || loginForm.get('password')!.touched)" class="login__content--errors">
+            <span *ngIf="loginForm.get('password')!.hasError('required')">La Contraseña es obligatoria.</span>
+            <span *ngIf="loginForm.get('password')!.hasError('minlength')">La Contraseña debe contener minimo 6 caracteres</span>
+        </div>
+    </label>
+    <!-- <div class="login__content login__content--right">
+        <p class="login__link">Olvide mi contraseña</p>
+    </div> -->
+    <button class="login__button" type="submit" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+    <div class="login__content login__content--center">
+        <p class="login__text">No tienes cuenta? <a routerLink="/home/register" class="login__link">Registrate ahora</a></p>
+    </div>
+</form>
+
