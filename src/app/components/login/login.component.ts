@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { minLengthValidator } from '../../shared/validators/min-length.validators';
 import { IpService } from '../../shared/services/ip/ip.service';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -12,6 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   userIp!: string;
+  session_date = new Date()
   unsuscriber$: Subject<any> = new Subject<any>();
 
   constructor(private fb: FormBuilder, private ipService: IpService) {}
@@ -27,7 +27,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if(this.loginForm.valid) {
-      console.log("enviado", this.userIp);
+      const data = {
+        email: this.loginForm.controls['email'].value,
+        password: this.loginForm.controls['password'].value,
+      }
+      console.log("enviado", data, this.userIp);
     }
   }
 

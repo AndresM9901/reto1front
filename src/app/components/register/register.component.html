@@ -1,1 +1,26 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" class="register" (ngSubmit)="onSubmit()">
+    <h2 class="register__title">Registrarse</h2>
+    <label class="register__label">
+        Correo
+        <input formControlName="email" type="email" class="" placeholder="Correo" class="register__input">
+        <div *ngIf="registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)" class="register__content--errors">
+            <span *ngIf="registerForm.get('email')!.hasError('required')">El Correo es obligatorio.</span>
+            <span *ngIf="registerForm.get('email')!.hasError('email')">El correo no es valido.</span>
+        </div>
+    </label>
+    <label class="register__label">
+        Contraseña
+        <input formControlName="password" type="password" class="" placeholder="Contraseña" class="register__input">
+        <div *ngIf="registerForm.get('password')!.invalid && (registerForm.get('password')!.dirty || registerForm.get('password')!.touched)" class="register__content--errors">
+            <span *ngIf="registerForm.get('password')!.hasError('required')">La Contraseña es obligatoria.</span>
+            <span *ngIf="registerForm.get('password')!.hasError('minlength')">La Contraseña debe contener minimo 6 caracteres</span>
+        </div>
+    </label>
+    <!-- <div class="login__content login__content--right">
+        <p class="login__link">Olvide mi contraseña</p>
+    </div> -->
+    <button class="register__button" type="submit" [disabled]="registerForm.invalid">Registrate</button>
+    <div class="register__content register__content--center">
+        <p class="register__text">¿Ya tienes cuenta? <a routerLink="/home/login" class="register__link">Inicia sesión ahora</a></p>
+    </div>
+</form>
